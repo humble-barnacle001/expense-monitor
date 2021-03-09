@@ -18,7 +18,7 @@ const Login = () => {
                         dispatch({ type: "LOAD" });
                         googleLogin().catch((e) => {
                             if (e.message === "Google login failed")
-                                dispatch({ type: "LOGOUT", payload: null });
+                                dispatch({ type: "LOGOUT" });
                             else console.error(e);
                         });
                     }}
