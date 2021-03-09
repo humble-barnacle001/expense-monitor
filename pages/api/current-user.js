@@ -5,7 +5,7 @@ export default async function handler(req, res) {
         const {
             status,
             body: { user, errors }
-        } = await authMiddleware(req, res);
+        } = await authMiddleware(req.headers.authorization);
         const uid = user ? user.uid : "";
         if (status === 200) res.json({ status, body: { user: { uid } } });
         else res.json({ status, body: { errors } });
