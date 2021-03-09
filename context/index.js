@@ -2,11 +2,21 @@ import { createContext, useReducer } from "react";
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case "LOGIN":
         case "LOGOUT":
-            return { ...state, user: action.payload, loading: false };
+            action.payload = null;
+        case "LOGIN":
+            return {
+                ...state,
+                user: action.payload,
+                transaction: [],
+                loading: false
+            };
         case "LOAD":
             return { ...state, loading: true };
+        case "LOAD_TRANSACTION":
+            return { ...state, tload: true };
+        case "TRANSACTION_FETCHED":
+            return { ...state, transaction: action.payload, tload: false };
         default:
             return state;
     }
@@ -14,7 +24,9 @@ const reducer = (state, action) => {
 
 const intialState = {
     user: null,
-    loading: true
+    loading: true,
+    transaction: [],
+    tload: false
 };
 
 const Context = createContext({});
