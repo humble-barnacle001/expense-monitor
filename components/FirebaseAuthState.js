@@ -19,10 +19,10 @@ export default function FirebaseAuthState({ children }) {
         return firebase.auth().onAuthStateChanged(
             async (user) => {
                 if (!user) {
+                    firebase.firestore().terminate();
                     document.cookie = `token=`;
                     dispatch({
-                        type: "LOGOUT",
-                        payload: null
+                        type: "LOGOUT"
                     });
                 } else {
                     const { token } = await user.getIdTokenResult(true);
@@ -52,8 +52,7 @@ export default function FirebaseAuthState({ children }) {
                         .catch((err) => {
                             console.log("Error in fetch: ", err.message);
                             dispatch({
-                                type: "LOGOUT",
-                                payload: null
+                                type: "LOGOUT"
                             });
                             window.halfmoon.initStickyAlert({
                                 content: "Verification failed!!",
@@ -68,8 +67,7 @@ export default function FirebaseAuthState({ children }) {
                 console.log("Error in firebase state component", e);
                 document.cookie = `token=`;
                 dispatch({
-                    type: "LOGOUT",
-                    payload: null
+                    type: "LOGOUT"
                 });
                 window.halfmoon.initStickyAlert({
                     content: "Verification failed!!",
