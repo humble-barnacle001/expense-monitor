@@ -7,22 +7,24 @@ export default function MyApp({ Component, pageProps }) {
     useEffect(() => {
         const el = document.getElementById("themeToggler");
         function setThemeICon() {
-            if (halfmoon.readCookie("halfmoon_preferredMode")) {
-                if (
-                    halfmoon.readCookie("halfmoon_preferredMode") ==
-                    "light-mode"
-                ) {
-                    document.body.classList.remove("dark-mode");
-                    el.innerHTML =
-                        "<i class='far fa-moon' aria-hidden='true'></i>";
-                } else if (
-                    halfmoon.readCookie("halfmoon_preferredMode") == "dark-mode"
-                ) {
-                    document.body.classList.add("dark-mode");
-                    el.innerHTML =
-                        "<i class='far fa-sun' aria-hidden='true'></i>";
-                }
-            }
+            if (window.halfmoon) {
+                if (halfmoon.readCookie("halfmoon_preferredMode"))
+                    if (
+                        halfmoon.readCookie("halfmoon_preferredMode") ===
+                        "light-mode"
+                    ) {
+                        document.body.classList.remove("dark-mode");
+                        el.innerHTML =
+                            "<i class='far fa-moon' aria-hidden='true'></i>";
+                    } else if (
+                        halfmoon.readCookie("halfmoon_preferredMode") ===
+                        "dark-mode"
+                    ) {
+                        document.body.classList.add("dark-mode");
+                        el.innerHTML =
+                            "<i class='far fa-sun' aria-hidden='true'></i>";
+                    }
+            } else setTimeout(() => setThemeICon(), 1000);
         }
         el.addEventListener("click", () => {
             halfmoon.toggleDarkMode();
