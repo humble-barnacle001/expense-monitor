@@ -26,7 +26,6 @@ export const addTransaction = async (data) => {
 };
 
 export const delTransaction = async (id) => {
-    console.log(id);
     const user = firebase.auth().currentUser;
     if (id && user) {
         firebase
