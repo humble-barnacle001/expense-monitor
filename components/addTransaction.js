@@ -117,7 +117,7 @@ const AddTransaction = () => {
                             </div>
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='purpose' className='required'>
+                            <label htmlFor='timestamp' className='required'>
                                 Date
                             </label>
                             <input
