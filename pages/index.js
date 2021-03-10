@@ -63,7 +63,7 @@ const Home = () => {
         <div className='container'>
             <h1 className='text-center p-10'>Balance Sheet</h1>
             <div className='row'>
-                <div className='col-10 col-md-8 m-auto'>
+                <div className='col-11 col-lg-8 m-auto'>
                     {!tload ? (
                         transaction.length > 0 ? (
                             <table className='table table-bordered'>
@@ -72,7 +72,9 @@ const Home = () => {
                                         <th>Date</th>
                                         <th className='text-center'>Credit</th>
                                         <th className='text-center'>Debit</th>
-                                        <th className='text-center'>Purpose</th>
+                                        <th className='text-center d-none d-sm-flex'>
+                                            Purpose
+                                        </th>
                                         <th className='text-right'>Balance</th>
                                     </tr>
                                 </thead>
@@ -92,7 +94,7 @@ const Home = () => {
                                             <td className='text-center'>
                                                 {t.credit ? "" : t.amount}
                                             </td>
-                                            <td className='text-center text-secondary-dm'>
+                                            <td className='text-center text-secondary-dm d-none d-sm-flex'>
                                                 {t.description}
                                             </td>
                                             <td
@@ -122,37 +124,12 @@ const Home = () => {
                     )}
                 </div>
             </div>
-            <div className='row mt-20'>
+            <div className='row my-20'>
                 <div className='m-auto'>
-                    {/* BUTTON IS DISABLED AS OF NOW */}
                     <button
                         className='btn btn-primary btn-rounded btn-block'
                         onClick={() =>
-                            ref
-                                .add({
-                                    timestamp: new Date().getTime(),
-                                    credit: Math.random() >= 0.5,
-                                    amount: Math.floor(Math.random() * 1000),
-                                    description: "TESTING",
-                                    _v: firebase.firestore.FieldValue.serverTimestamp()
-                                })
-                                .then(() =>
-                                    window.halfmoon.initStickyAlert({
-                                        content: "Added successfully",
-                                        title: "Success!!",
-                                        alertType: "alert-success",
-                                        fillType: "filled"
-                                    })
-                                )
-                                .catch((e) => {
-                                    console.log("ERROR IN ADDING:", e);
-                                    window.halfmoon.initStickyAlert({
-                                        content: "Error adding new transaction",
-                                        title: "Error!!",
-                                        alertType: "alert-danger",
-                                        fillType: "filled"
-                                    });
-                                })
+                            window.halfmoon.toggleModal("addTransaction")
                         }
                     >
                         ADD
