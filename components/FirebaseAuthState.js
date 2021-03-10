@@ -20,7 +20,6 @@ export default function FirebaseAuthState({ children }) {
             async (user) => {
                 if (!user) {
                     firebase.firestore().terminate();
-                    document.cookie = `token=`;
                     dispatch({
                         type: "LOGOUT"
                     });
@@ -34,7 +33,6 @@ export default function FirebaseAuthState({ children }) {
                         .then((r) =>
                             r.json().then((res) => {
                                 if (res.status === 200) {
-                                    document.cookie = `token=${token}; expires=Session}`;
                                     dispatch({
                                         type: "LOGIN",
                                         payload: res.body.user
@@ -65,7 +63,6 @@ export default function FirebaseAuthState({ children }) {
             },
             (e) => {
                 console.log("Error in firebase state component", e);
-                document.cookie = `token=`;
                 dispatch({
                     type: "LOGOUT"
                 });
