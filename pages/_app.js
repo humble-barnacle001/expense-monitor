@@ -34,6 +34,12 @@ export default function MyApp({ Component, pageProps }) {
 
         // Works only for reload or initial load
         setThemeICon();
+
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("serviceWorker.js");
+            });
+        }
     }, []);
 
     return (
