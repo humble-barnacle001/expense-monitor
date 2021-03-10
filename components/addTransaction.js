@@ -50,7 +50,6 @@ const AddTransaction = () => {
                             if (credit === debit)
                                 window.alert("Error detected");
                             else {
-                                console.log(pdata);
                                 e.target.reset();
                                 addTransaction(pdata);
                                 window.halfmoon.toggleModal("addTransaction");
