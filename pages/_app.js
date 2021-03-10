@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import AddTransaction from "../components/addTransaction";
 import FirebaseAuthState from "../components/FirebaseAuthState";
 import Nav from "../components/nav";
 import { Provider } from "../context";
@@ -38,6 +39,7 @@ export default function MyApp({ Component, pageProps }) {
     return (
         <Provider>
             <FirebaseAuthState>
+                <AddTransaction />
                 <div
                     className='page-wrapper with-navbar with-transitions'
                     data-sidebar-hidden='hidden'
