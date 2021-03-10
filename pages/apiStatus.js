@@ -1,28 +1,25 @@
 const Page = ({ data }) => {
     return (
-        <div className='m-auto'>
-            <h1 className='text-center p-10'>{data}!!</h1>
+        <div className='text-center container m-auto'>
+            <h1 className='p-10'>API Status</h1>
+            <p className={`text-${data ? "success" : "danger"}`}>
+                {data ? data : "API Error"}!!
+            </p>
         </div>
     );
 };
 
 // This gets called on every request
 export async function getServerSideProps(Context) {
-    // Fetch data
-    try {
-        const res = await fetch(
-            `http${process.env.NODE_ENV === "production" ? "s" : ""}://${
-                Context.req.headers.host
-            }/api`
-        );
-        const data = await res.json();
-
-        // Pass data to the page via props
-        return { props: { data: data.body.message } };
-    } catch (err) {
-        console.log(err);
-        return { props: { data: "API error" } };
-    }
+    return {
+        props: {
+            data: `API up and running at ${new Date().toLocaleString("en-IN", {
+                dateStyle: "long",
+                timeStyle: "short",
+                hour12: true
+            })}`
+        }
+    };
 }
 
 export default Page;
