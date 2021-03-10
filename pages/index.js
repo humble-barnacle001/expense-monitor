@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { delTransaction } from "../actions/transaction";
 import Loader from "../components/Loader";
 import withAuth from "../components/PrivateRoute";
 import { Context } from "../context";
@@ -26,15 +27,7 @@ const Home = () => {
                                 const data = d.data();
                                 if (data.credit) bal += data.amount;
                                 else bal -= data.amount;
-                                transaction.push({ ...data, bal });
-                            });
-                        else
-                            window.halfmoon.initStickyAlert({
-                                content:
-                                    "Start adding transactions to continue",
-                                title: "No Data!!",
-                                alertType: "alert-secondary",
-                                fillType: "filled"
+                                transaction.push({ ...data, bal, id: d.id });
                             });
                         dispatch({
                             type: "TRANSACTION_FETCHED",
@@ -76,11 +69,19 @@ const Home = () => {
                                             Purpose
                                         </th>
                                         <th className='text-right'>Balance</th>
+                                        <th className='text-center d-none d-sm-flex'></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <style jsx>
+                                        {`
+                                            .hover:hover {
+                                                cursor: pointer;
+                                            }
+                                        `}
+                                    </style>
                                     {transaction.map((t, i) => (
-                                        <tr key={i}>
+                                        <tr key={t.id}>
                                             <th className='text-primary'>
                                                 {new Date(
                                                     t.timestamp
@@ -109,6 +110,22 @@ const Home = () => {
                                                 }-lm`}
                                             >
                                                 {t.bal}
+                                            </td>
+                                            <td className='text-center d-none d-sm-flex'>
+                                                <span
+                                                    className='text-danger hover'
+                                                    onClick={(e) =>
+                                                        delTransaction(
+                                                            e.target.parentNode
+                                                                .id
+                                                        )
+                                                    }
+                                                >
+                                                    <i
+                                                        className='fas fa-trash'
+                                                        id={t.id}
+                                                    ></i>
+                                                </span>
                                             </td>
                                         </tr>
                                     ))}
