@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    if (process.env.NODE_ENV !== "production")
+    if (!process.env.NODE_ENV && process.env.NODE_ENV !== "production")
         try {
             firebase.firestore().enablePersistence();
             firebase.analytics();
