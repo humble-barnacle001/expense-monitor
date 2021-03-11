@@ -113,7 +113,7 @@ const Home = () => {
                                             </td>
                                             <td className='text-center d-none d-sm-flex'>
                                                 <span
-                                                    className='text-danger hover'
+                                                    className='text-danger m-auto hover'
                                                     onClick={(e) =>
                                                         delTransaction(
                                                             e.target.parentNode
