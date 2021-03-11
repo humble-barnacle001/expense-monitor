@@ -15,10 +15,11 @@ const firebaseConfig = {
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-    try {
-        firebase.firestore().enablePersistence();
-        firebase.analytics();
-    } catch (e) {}
+    if (process.env.NODE_ENV !== "production")
+        try {
+            firebase.firestore().enablePersistence();
+            firebase.analytics();
+        } catch (e) {}
 }
 
 export default firebase;
