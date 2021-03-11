@@ -9,7 +9,6 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Expense Monitor</title>
                     <meta
                         name='description'
                         content='A simple UI to keep track of day to day expenses'

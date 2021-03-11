@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import AddTransaction from "../components/addTransaction";
 import FirebaseAuthState from "../components/FirebaseAuthState";
@@ -43,20 +44,25 @@ export default function MyApp({ Component, pageProps }) {
     }, []);
 
     return (
-        <Provider>
-            <FirebaseAuthState>
-                <AddTransaction />
-                <div
-                    className='page-wrapper with-navbar with-transitions'
-                    data-sidebar-hidden='hidden'
-                >
-                    <Nav />
-                    <div className='sticky-alerts'></div>
-                    <div className='content-wrapper'>
-                        <Component {...pageProps} />
+        <>
+            <Head>
+                <title>Expense Monitor</title>
+            </Head>
+            <Provider>
+                <FirebaseAuthState>
+                    <AddTransaction />
+                    <div
+                        className='page-wrapper with-navbar with-transitions'
+                        data-sidebar-hidden='hidden'
+                    >
+                        <Nav />
+                        <div className='sticky-alerts'></div>
+                        <div className='content-wrapper'>
+                            <Component {...pageProps} />
+                        </div>
                     </div>
-                </div>
-            </FirebaseAuthState>
-        </Provider>
+                </FirebaseAuthState>
+            </Provider>
+        </>
     );
 }
