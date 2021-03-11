@@ -16,6 +16,7 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
     try {
+        firebase.firestore().enablePersistence();
         firebase.analytics();
     } catch (e) {}
 }
