@@ -9,6 +9,7 @@ const AddTransaction = () => {
             role='dialog'
             data-overlay-dismissal-disabled='true'
             data-esc-dismissal-disabled='true'
+            onFocus={(e) => console.log(e.target.childNodes)}
         >
             <div className='modal-dialog' role='document'>
                 <div className='modal-content'>
@@ -126,7 +127,14 @@ const AddTransaction = () => {
                                 className='form-control'
                                 required='required'
                                 autoComplete='none'
-                                max={new Date().toISOString().substring(0, 10)}
+                                onFocus={(e) =>
+                                    e.target.setAttribute(
+                                        "max",
+                                        `${new Date()
+                                            .toISOString()
+                                            .substring(0, 10)}`
+                                    )
+                                }
                             />
                         </div>
                         <input
