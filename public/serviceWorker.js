@@ -33,22 +33,9 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-    /https:\/\/cdn\.jsdelivr\.net\/npm\/halfmoon@1\.1\.1\/(?:css|js)\/(.+)\.(?:css|js)$/,
+    /https:\/\/cdn\.jsdelivr\.net\/(.+)\/(.+)@(.+)\/(.+)\.(?:css|js)$/,
     new workbox.strategies.CacheFirst({
-        cacheName: "halfmoon-cache",
-        plugins: [
-            new workbox.expiration.ExpirationPlugin({
-                maxEntries: 20,
-                maxAgeSeconds: 15 * 24 * 60 * 60
-            })
-        ]
-    })
-);
-
-workbox.routing.registerRoute(
-    /https:\/\/use\.fontawesome\.com\/releases\/v(\d+)\.(\d+)\.(\d+)\/(?:css|js)\/(.+)\.(?:css|js)$/,
-    new workbox.strategies.CacheFirst({
-        cacheName: "faw-cache",
+        cacheName: "jsdeliver-cdn-cache",
         plugins: [
             new workbox.expiration.ExpirationPlugin({
                 maxEntries: 20,
