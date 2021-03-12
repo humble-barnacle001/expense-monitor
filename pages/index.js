@@ -21,13 +21,21 @@ const Home = () => {
                 ref.orderBy("timestamp").onSnapshot(
                     (doc) => {
                         const transaction = [];
-                        let bal = 0;
+                        let bal = 0,
+                            cr = 0;
                         if (!doc.empty)
                             doc.docs.forEach((d) => {
                                 const data = d.data();
-                                if (data.credit) bal += data.amount;
-                                else bal -= data.amount;
-                                transaction.push({ ...data, bal, id: d.id });
+                                if (data.credit) {
+                                    bal += data.amount;
+                                    cr += data.amount;
+                                } else bal -= data.amount;
+                                transaction.push({
+                                    ...data,
+                                    bal,
+                                    id: d.id,
+                                    cr
+                                });
                             });
                         dispatch({
                             type: "TRANSACTION_FETCHED",
@@ -129,6 +137,32 @@ const Home = () => {
                                             </td>
                                         </tr>
                                     ))}
+                                    {
+                                        <tr
+                                            key={new Date().getTime()}
+                                            className='bg-very-dark-dm bg-light-lm'
+                                        >
+                                            <th></th>
+                                            <td className='text-center text-success'>
+                                                {
+                                                    transaction[
+                                                        transaction.length - 1
+                                                    ].cr
+                                                }
+                                            </td>
+                                            <td className='text-center text-danger'>
+                                                {transaction[
+                                                    transaction.length - 1
+                                                ].amount -
+                                                    transaction[
+                                                        transaction.length - 1
+                                                    ].cr}
+                                            </td>
+                                            <td className='d-none d-sm-flex'></td>
+                                            <td></td>
+                                            <td className='d-none d-sm-flex'></td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         ) : (
