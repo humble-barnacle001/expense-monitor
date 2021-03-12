@@ -16,15 +16,13 @@ export default function MyApp({ Component, pageProps }) {
                         "light-mode"
                     ) {
                         document.body.classList.remove("dark-mode");
-                        el.innerHTML =
-                            "<i class='far fa-moon' aria-hidden='true'></i>";
+                        el.innerHTML = "<i class='bi bi-moon-fill'></i>";
                     } else if (
                         halfmoon.readCookie("halfmoon_preferredMode") ===
                         "dark-mode"
                     ) {
                         document.body.classList.add("dark-mode");
-                        el.innerHTML =
-                            "<i class='far fa-sun' aria-hidden='true'></i>";
+                        el.innerHTML = "<i class='bi bi-sun-fill'></i>";
                     }
             } else setTimeout(() => setThemeICon(), 1000);
         }

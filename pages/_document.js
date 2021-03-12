@@ -49,16 +49,13 @@ class MyDocument extends Document {
                     />
                     <meta name='theme-color' content='#f2f2f2' />
                     <link
+                        rel='stylesheet'
+                        href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'
+                    />
+                    <link
                         href='https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css'
                         rel='stylesheet'
                     />
-                    <script
-                        async
-                        defer
-                        src='https://use.fontawesome.com/releases/v5.15.2/js/all.js'
-                        integrity='sha384-vuFJ2JiSdUpXLKGK+tDteQZBqNlMwAjhZ3TvPaDfN9QmbPb7Q8qUpbSNapQev3YF'
-                        crossOrigin='anonymous'
-                    ></script>
                 </Head>
                 <body data-set-preferred-mode-onload='true'>
                     <Main />

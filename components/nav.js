@@ -22,7 +22,7 @@ const Nav = () => {
                                             Home
                                         </span>
                                         <span className='d-sm-none'>
-                                            <i className='fas fa-home'></i>
+                                            <i className='bi bi-house-fill'></i>
                                         </span>
                                     </a>
                                 </Link>
@@ -37,7 +37,7 @@ const Nav = () => {
                                         API Status
                                     </span>
                                     <span className='d-sm-none'>
-                                        <i className='fas fa-exclamation-triangle'></i>
+                                        <i className='bi bi-exclamation-octagon-fill'></i>
                                     </span>
                                 </a>
                             </Link>
@@ -62,7 +62,7 @@ const Nav = () => {
                                                 className='d-sm-none'
                                                 key='logOut'
                                             >
-                                                <i className='fas fa-sign-out-alt'></i>
+                                                <i className='bi bi-box-arrow-right'></i>
                                             </span>
                                         </a>
                                     </Link>
@@ -76,7 +76,7 @@ const Nav = () => {
                                                 className='d-sm-none'
                                                 key='logIn'
                                             >
-                                                <i className='fas fa-sign-in-alt'></i>
+                                                <i className='bi bi-box-arrow-in-right'></i>
                                             </span>
                                         </a>
                                     </Link>
@@ -92,7 +92,7 @@ const Nav = () => {
                         id='themeToggler'
                         aria-label='Toggle dark mode'
                     >
-                        <i className='far fa-moon' aria-hidden='true'></i>
+                        <i className='bi bi-moon-fill'></i>
                     </button>
                 </div>
             </div>

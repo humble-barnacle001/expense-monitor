@@ -23,7 +23,7 @@ const Login = () => {
                         });
                     }}
                 >
-                    <i className='fab fa-google'></i> Authenticate with Google
+                    <i className="bi bi-google"></i> Authenticate with Google
                 </button>
             </div>
         </div>
