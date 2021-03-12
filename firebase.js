@@ -17,7 +17,10 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
     if (!process.env.NODE_ENV && process.env.NODE_ENV !== "production")
         try {
-            firebase.firestore().enablePersistence();
+            firebase
+                .firestore()
+                .enablePersistence()
+                .then(() => console.log("Persistance enabled"));
             firebase.analytics();
         } catch (e) {}
 }
