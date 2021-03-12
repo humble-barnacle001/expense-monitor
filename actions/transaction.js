@@ -5,7 +5,7 @@ export const addTransaction = async (data) => {
     const ref = firebase
         .firestore()
         .collection(`data/${user ? user.uid : "none"}/transactions`);
-    ref.add(data)
+    ref.add({...data, _v: firebase.firestore.FieldValue.serverTimestamp()})
         .then(() =>
             window.halfmoon.initStickyAlert({
                 content: "Added successfully",
