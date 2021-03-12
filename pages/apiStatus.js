@@ -1,9 +1,9 @@
-const Page = ({ data }) => {
+const Page = ({ data, ts }) => {
     return (
         <div className='text-center container m-auto'>
             <h1 className='p-10'>API Status</h1>
             <p className={`text-${data ? "success" : "danger"}`}>
-                {data ? data : "API Error"}!!
+                {data ? `${data} ${new Date(ts)}` : "API Error"}!!
             </p>
         </div>
     );
@@ -13,11 +13,8 @@ const Page = ({ data }) => {
 export async function getServerSideProps(Context) {
     return {
         props: {
-            data: `API up and running at ${new Date().toLocaleString("en-IN", {
-                dateStyle: "long",
-                timeStyle: "short",
-                hour12: true
-            })}`
+            data: `API up and running at`,
+            ts: new Date().getTime()
         }
     };
 }
