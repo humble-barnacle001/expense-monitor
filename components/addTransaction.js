@@ -9,7 +9,6 @@ const AddTransaction = () => {
             role='dialog'
             data-overlay-dismissal-disabled='true'
             data-esc-dismissal-disabled='true'
-            onFocus={(e) => console.log(e.target.childNodes)}
         >
             <div className='modal-dialog' role='document'>
                 <div className='modal-content'>
