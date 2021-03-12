@@ -124,13 +124,12 @@ const Home = () => {
                                                     className='text-danger m-auto hover'
                                                     onClick={(e) =>
                                                         delTransaction(
-                                                            e.target.parentNode
-                                                                .id
+                                                            e.target.id
                                                         )
                                                     }
                                                 >
                                                     <i
-                                                        className='fas fa-trash'
+                                                        className='bi bi-x-circle'
                                                         id={t.id}
                                                     ></i>
                                                 </span>
