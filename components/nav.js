@@ -19,10 +19,10 @@ const Nav = () => {
                                 <Link href='/'>
                                     <a className='nav-link text-primary'>
                                         <span className=' d-none d-sm-flex'>
-                                            New
+                                            Home
                                         </span>
                                         <span className='d-sm-none'>
-                                            <i className='fas fa-plus'></i>
+                                            <i className='fas fa-home'></i>
                                         </span>
                                     </a>
                                 </Link>
