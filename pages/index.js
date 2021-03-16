@@ -152,10 +152,10 @@ const Home = () => {
                                             <td className='text-center text-danger'>
                                                 {transaction[
                                                     transaction.length - 1
-                                                ].amount -
+                                                ].cr -
                                                     transaction[
                                                         transaction.length - 1
-                                                    ].cr}
+                                                    ].bal}
                                             </td>
                                             <td className='d-none d-sm-flex'></td>
                                             <td></td>
