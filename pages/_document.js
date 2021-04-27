@@ -53,14 +53,14 @@ class MyDocument extends Document {
                         href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'
                     />
                     <link
-                        href='https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/css/halfmoon-variables.min.css'
+                        href='https://cdn.jsdelivr.net/gh/humble-barnacle001/halfmoon@v1.1.1/css/halfmoon-variables.min.css'
                         rel='stylesheet'
                     />
                 </Head>
                 <body data-set-preferred-mode-onload='true'>
                     <Main />
                     <script
-                        src='https://cdn.jsdelivr.net/npm/halfmoon@1.1.1/js/halfmoon.min.js'
+                        src='https://cdn.jsdelivr.net/gh/humble-barnacle001/halfmoon@v1.1.1/js/halfmoon.min.js'
                         async
                     />
                     <NextScript />
