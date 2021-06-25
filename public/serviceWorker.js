@@ -44,3 +44,16 @@ workbox.routing.registerRoute(
         ]
     })
 );
+
+workbox.routing.registerRoute(
+    /https:\/\/cdn\.jsdelivr\.net\/(.+)\/(.+)@(.+)\/(.+)\.(?:woff(2*))$/,
+    new workbox.strategies.CacheFirst({
+        cacheName: "jsdeliver-font-cache",
+        plugins: [
+            new workbox.expiration.ExpirationPlugin({
+                maxEntries: 20,
+                maxAgeSeconds: 15 * 24 * 60 * 60
+            })
+        ]
+    })
+);
