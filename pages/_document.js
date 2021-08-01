@@ -48,6 +48,7 @@ class MyDocument extends Document {
                         content='/browserconfig.xml'
                     />
                     <meta name='theme-color' content='#f2f2f2' />
+                    <meta name="msvalidate.01" content="2F551BD4884C16B06438AE4257100B31" />
                     <link
                         rel='stylesheet'
                         href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css'
