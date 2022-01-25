@@ -4,6 +4,4 @@ updates:
   directory: "/"
   schedule:
     interval: daily
-    time: "03:00"
-    timezone: Asia/Kolkata
   open-pull-requests-limit: 10
