@@ -107,6 +107,30 @@ const Home = () => {
     return (
         <div className='container'>
             <h1 className='text-center p-10'>Balance Sheet</h1>
+            <div className='row my-20'>
+                <div className='m-auto d-flex' style={{ gap: "0.5rem" }}>
+                    <button
+                        className='btn btn-secondary btn-rounded'
+                        onClick={exportCSV}
+                        disabled={transaction.length === 0}
+                    >
+                        Export CSV
+                    </button>
+                    <input
+                        ref={importRef}
+                        type='file'
+                        accept='.csv'
+                        style={{ display: "none" }}
+                        onChange={importCSV}
+                    />
+                    <button
+                        className='btn btn-secondary btn-rounded'
+                        onClick={() => importRef.current.click()}
+                    >
+                        Import CSV
+                    </button>
+                </div>
+            </div>
             <div className='row'>
                 <div className='col-11 col-lg-8 m-auto'>
                     {!tload ? (
@@ -155,11 +179,7 @@ const Home = () => {
                                                     t.bal < 0
                                                         ? "danger"
                                                         : "success"
-                                                }-dm bg-${
-                                                    t.bal < 0
-                                                        ? "danger"
-                                                        : "success"
-                                                }-lm`}
+                                                }-dm bg-${t.bal < 0 ? "danger" : "success"}-lm`}
                                             >
                                                 {t.bal}
                                             </td>
@@ -227,26 +247,6 @@ const Home = () => {
                         }
                     >
                         ADD
-                    </button>
-                    <button
-                        className='btn btn-secondary btn-rounded'
-                        onClick={exportCSV}
-                        disabled={transaction.length === 0}
-                    >
-                        Export CSV
-                    </button>
-                    <input
-                        ref={importRef}
-                        type='file'
-                        accept='.csv'
-                        style={{ display: "none" }}
-                        onChange={importCSV}
-                    />
-                    <button
-                        className='btn btn-secondary btn-rounded'
-                        onClick={() => importRef.current.click()}
-                    >
-                        Import CSV
                     </button>
                 </div>
             </div>
