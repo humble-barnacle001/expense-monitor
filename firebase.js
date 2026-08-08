@@ -1,7 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/analytics";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/analytics";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FRB_API_KEY,
@@ -10,7 +10,7 @@ const firebaseConfig = {
     storageBucket: process.env.NEXT_PUBLIC_FRB_STORAGE_BUCKET,
     messagingSenderId: process.env.NEXT_PUBLIC_FRB_MSG_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_FRB_APP_ID,
-    measurementId: process.env.NEXT_PUBLIC_FRB_MEASUREMENT_ID
+    measurementId: process.env.NEXT_PUBLIC_FRB_MEASUREMENT_ID,
 };
 
 if (!firebase.apps.length) {
