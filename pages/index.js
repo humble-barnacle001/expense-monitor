@@ -1,5 +1,5 @@
-import { useContext, useEffect } from "react";
-import { delTransaction } from "../actions/transaction";
+import { useContext, useEffect, useRef } from "react";
+import { delTransaction, addTransaction } from "../actions/transaction";
 import Loader from "../components/Loader";
 import withAuth from "../components/PrivateRoute";
 import { Context } from "../context";
@@ -8,11 +8,55 @@ import firebase from "../firebase";
 const Home = () => {
     const {
         state: { transaction, tload },
-        dispatch
+        dispatch,
     } = useContext(Context);
     const db = firebase.firestore();
     const user = firebase.auth().currentUser;
     const ref = db.collection("data").doc(user.uid).collection("transactions");
+
+    const importRef = useRef(null);
+
+    const exportCSV = () => {
+        const header = "timestamp,description,credit,amount";
+        const rows = transaction.map(
+            (t) =>
+                `${new Date(t.timestamp).toISOString()},"${t.description.replace(/"/g, '""')}",${t.credit},${t.amount}`,
+        );
+        const blob = new Blob([[header, ...rows].join("\n")], {
+            type: "text/csv",
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "transactions.csv";
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const importCSV = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ({ target: { result } }) => {
+            const [headerLine, ...lines] = result.trim().split("\n");
+            lines.forEach((line) => {
+                // parse quoted description field
+                const match = line.match(
+                    /^([^,]+),"?((?:[^"]|"")*?)"?,([^,]+),([^,]+)$/,
+                );
+                if (!match) return;
+                const [, ts, description, credit, amount] = match;
+                addTransaction({
+                    timestamp: new Date(ts.trim()).getTime(),
+                    description: description.replace(/""/g, '"'),
+                    credit: credit.trim() === "true",
+                    amount: parseInt(amount.trim(), 10),
+                });
+            });
+        };
+        reader.readAsText(file);
+        e.target.value = "";
+    };
 
     useEffect(() => {
         dispatch({ type: "LOAD_TRANSACTION" });
@@ -34,12 +78,12 @@ const Home = () => {
                                     ...data,
                                     bal,
                                     id: d.id,
-                                    cr
+                                    cr,
                                 });
                             });
                         dispatch({
                             type: "TRANSACTION_FETCHED",
-                            payload: transaction
+                            payload: transaction,
                         });
                     },
                     (err) => {
@@ -49,14 +93,14 @@ const Home = () => {
                                 content: "Error while fetching from database",
                                 title: "Error!!",
                                 alertType: "alert-danger",
-                                fillType: "filled"
+                                fillType: "filled",
                             });
                         }
-                    }
-                )
+                    },
+                ),
             )
             .catch((e) =>
-                console.log("Error while waiting for backend update", e)
+                console.log("Error while waiting for backend update", e),
             );
     }, [user]);
 
@@ -92,9 +136,9 @@ const Home = () => {
                                         <tr key={t.id}>
                                             <th className='text-primary'>
                                                 {new Date(
-                                                    t.timestamp
+                                                    t.timestamp,
                                                 ).toLocaleString("en-IN", {
-                                                    dateStyle: "short"
+                                                    dateStyle: "short",
                                                 })}
                                             </th>
                                             <td className='text-center'>
@@ -124,7 +168,7 @@ const Home = () => {
                                                     className='text-danger m-auto hover'
                                                     onClick={(e) =>
                                                         delTransaction(
-                                                            e.target.id
+                                                            e.target.id,
                                                         )
                                                     }
                                                 >
@@ -175,14 +219,34 @@ const Home = () => {
                 </div>
             </div>
             <div className='row my-20'>
-                <div className='m-auto'>
+                <div className='m-auto d-flex' style={{ gap: "0.5rem" }}>
                     <button
-                        className='btn btn-primary btn-rounded btn-block'
+                        className='btn btn-primary btn-rounded'
                         onClick={() =>
                             window.halfmoon.toggleModal("addTransaction")
                         }
                     >
                         ADD
+                    </button>
+                    <button
+                        className='btn btn-secondary btn-rounded'
+                        onClick={exportCSV}
+                        disabled={transaction.length === 0}
+                    >
+                        Export CSV
+                    </button>
+                    <input
+                        ref={importRef}
+                        type='file'
+                        accept='.csv'
+                        style={{ display: "none" }}
+                        onChange={importCSV}
+                    />
+                    <button
+                        className='btn btn-secondary btn-rounded'
+                        onClick={() => importRef.current.click()}
+                    >
+                        Import CSV
                     </button>
                 </div>
             </div>
